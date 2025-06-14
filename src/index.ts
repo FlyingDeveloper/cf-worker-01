@@ -1,3 +1,5 @@
+import { factorial } from './calculations';
+
 /**
  * Welcome to Cloudflare Workers! This is your first worker.
  *
@@ -13,6 +15,23 @@
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
-		return new Response('Hello World!');
+        let datetime = new Date().toISOString();
+        const url = new URL(request.url);
+        const foo = url.searchParams.get('input');
+        let responseText = `${datetime}: Value of foo: ${foo}`;
+
+        if (foo !== null && !isNaN(Number(foo))) {
+            const bar = Number(foo);
+            responseText += `Factorial of ${bar}: ${factorial(bar)}`;
+        } else {
+            responseText += "Unable to calculate factorial";
+        }
+
+        let rnd = Math.random();
+        let response = await fetch(`https://pantheon.io/?bust=${rnd}`);
+        console.log(response);
+
+
+        return new Response(responseText);
 	},
 } satisfies ExportedHandler<Env>;
