@@ -28,9 +28,8 @@ export default {
         }
 
         let response = await fetch(`https://03141400.monoraillime.xyz`);
-        let cacheStatus = response.headers.get("cf-cache-status");
-        let ray = response.headers.get("cf-ray");
-        response.headers.append("From-My-Worker": "True");
-        return response;
+        let newResponse = new Response(response.body, response)
+        newResponse.headers.set("From-My-Worker", "True");
+        return newResponse;
 	},
 } satisfies ExportedHandler<Env>;
