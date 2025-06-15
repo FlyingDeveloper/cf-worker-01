@@ -30,8 +30,7 @@ export default {
         let response = await fetch(`https://03141400.monoraillime.xyz`);
         let cacheStatus = response.headers.get("cf-cache-status");
         let ray = response.headers.get("cf-ray");
-        responseText += `\n${cacheStatus}\n${ray}`;
-
-        return new Response(responseText);
+        response.headers.append("From-My-Worker": "True");
+        return response;
 	},
 } satisfies ExportedHandler<Env>;
