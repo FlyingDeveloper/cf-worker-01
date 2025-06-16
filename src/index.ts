@@ -27,7 +27,7 @@ export default {
             responseText += "Unable to calculate factorial";
         }
 
-        let response = await fetch(`https://03141400.monoraillime.xyz`);
+        let response = await fetch(`https://01161500.monoraillime.xyz`);
         let newResponse = new Response(response.body, response)
         newResponse.headers.set("From-My-Worker", "True");
         return newResponse;
