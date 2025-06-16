@@ -15,6 +15,7 @@ import { factorial } from './calculations';
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
+        let cache = caches.default;
         let datetime = new Date().toISOString();
         const url = new URL(request.url);
         const foo = url.searchParams.get('input');
@@ -32,6 +33,7 @@ export default {
         newResponse.headers.set("From-My-Worker", "True");
         newResponse.headers.set("Cache-Tag", "rhamilton1510");
         newResponse.headers.set("X-cf", JSON.stringify(response.cf));
+        cache.put(request, newResponse);
         return newResponse;
 	},
 } satisfies ExportedHandler<Env>;
