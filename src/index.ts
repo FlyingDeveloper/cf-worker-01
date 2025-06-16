@@ -30,6 +30,7 @@ export default {
         let response = await fetch(`https://01161500.monoraillime.xyz`);
         let newResponse = new Response(response.body, response)
         newResponse.headers.set("From-My-Worker", "True");
+        newResponse.headers.set("Cache-Tag", "rhamilton1510");
         return newResponse;
 	},
 } satisfies ExportedHandler<Env>;
