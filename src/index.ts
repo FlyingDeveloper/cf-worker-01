@@ -21,8 +21,10 @@ export default {
         if (cachedResponse) {
             let clonedCachedResponse = cachedResponse.clone();
             clonedCachedResponse.headers.set("Returning-From-Cache", "True");
+            console.log("Returning cached response");
             return clonedCachedResponse;
         }
+        console.log("No cached response found, fetching from origin");
 
         let datetime = new Date().toISOString();
         const url = new URL(request.url);
