@@ -20,7 +20,7 @@ export default {
         if (cachedResponse) {
             let clonedCachedResponse = cachedResponse.clone();
             clonedCachedResponse.headers.set("Returning-From-Cache", "True");
-            return cachedResponse;
+            return clonedCachedResponse;
         }
 
         let datetime = new Date().toISOString();
