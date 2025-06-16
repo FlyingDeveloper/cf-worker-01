@@ -17,7 +17,8 @@ export default {
 	async fetch(request, env, ctx): Promise<Response> {
         let originUrl = `https://01161500.monoraillime.xyz`;
         let cache = caches.default;
-        let cachedResponse = await cache.match(originUrl + "myWorker");
+        let cacheKey = originUrl + "myWorker";
+        let cachedResponse = await cache.match(cacheKey);
         if (cachedResponse) {
             let clonedCachedResponse = cachedResponse.clone();
             clonedCachedResponse.headers.set("Returning-From-Cache", "True");
@@ -40,7 +41,7 @@ export default {
 
         let response = await fetch(originUrl, {
             cf: {
-                cacheKey: originUrl + "myWorker"
+                cacheKey: cacheKey
             }
         });
         let newResponse = new Response(response.body, response)
