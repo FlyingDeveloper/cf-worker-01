@@ -16,7 +16,7 @@ import { factorial } from './calculations';
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
         let cache = caches.default;
-        let cachedResponse = await cache.match(request);
+        let cachedResponse = await cache.match(request.url + "myWorker");
         if (cachedResponse) {
             let clonedCachedResponse = cachedResponse.clone();
             clonedCachedResponse.headers.set("Returning-From-Cache", "True");
@@ -35,7 +35,11 @@ export default {
             responseText += "Unable to calculate factorial";
         }
 
-        let response = await fetch(`https://01161500.monoraillime.xyz`);
+        let response = await fetch(`https://01161500.monoraillime.xyz`, {
+            cf: {
+                cacheKey: request.url + "myWorker"
+            }
+        });
         let newResponse = new Response(response.body, response)
         newResponse.headers.set("From-My-Worker", "True");
         newResponse.headers.set("Cache-Tag", "rhamilton1510");
