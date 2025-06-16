@@ -49,6 +49,7 @@ export default {
         newResponse.headers.set("Cache-Tag", "rhamilton1510");
         newResponse.headers.set("X-cf", JSON.stringify(response.cf));
         newResponse.headers.set("X-host-metadata", request.cf?.hostMetadata ? JSON.stringify(request.cf.hostMetadata) : "No host metadata");
+        cache.put(cacheKey, newResponse.clone())
         return newResponse;
 	},
 } satisfies ExportedHandler<Env>;
