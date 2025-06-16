@@ -16,6 +16,13 @@ import { factorial } from './calculations';
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
         let cache = caches.default;
+        let cachedResponse = await cache.match(request);
+        if (cachedResponse) {
+            let clonedCachedResponse = cachedResponse.clone();
+            clonedCachedResponse.headers.set("Returning-From-Cache", "True");
+            return cachedResponse;
+        }
+
         let datetime = new Date().toISOString();
         const url = new URL(request.url);
         const foo = url.searchParams.get('input');
