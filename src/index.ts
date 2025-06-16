@@ -12,11 +12,11 @@ import { factorial } from './calculations';
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
+let cache = caches.default;
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
         let originUrl = `https://01161500.monoraillime.xyz`;
-        let cache = caches.default;
         let cacheKey = originUrl + "myWorker";
         let cachedResponse = await cache.match(cacheKey);
         if (cachedResponse) {
