@@ -15,9 +15,8 @@ import { factorial } from './calculations';
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
-        let url = "https://23.185.0.4/"
+        let url = "https://dev-rhamilton-test01.pantheonsite.io/";
         let beReq = new Request(url);
-        beReq.headers.set("host", "01161500.monoraillime.xyz");
         let beResp = await fetch(beReq, { cf: { cacheEverything: true }});
         let headers = "";
         beResp.headers.forEach((val, key) => {
