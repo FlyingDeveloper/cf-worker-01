@@ -17,7 +17,7 @@ export default {
 	async fetch(request, env, ctx): Promise<Response> {
         let beResp = await fetch("https://hello-world-worker.robhamilton-879.workers.dev/");
         let headers = "";
-        beResp.headers.forEach((key, val) => {
+        beResp.headers.forEach((val, key) => {
             headers += `${key}: ${val}<br />`;
         })
         //let cacheStatus = beResp.headers.get("cf-cache-status");
