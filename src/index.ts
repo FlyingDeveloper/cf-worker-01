@@ -15,7 +15,9 @@ import { factorial } from './calculations';
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
-        let respText = `Hello, world! The factorial of 5 is ${factorial(5)}.`;
+        let beResp = await fetch("https://hello-world-worker.robhamilton-879.workers.dev/");
+        let beHeaders = JSON.stringify(beResp.headers);
+        let respText = `Hello, world! The factorial of 5 is ${factorial(5)}.<br />${beHeaders}`;
         let resp = new Response(`<html><head></head><body><p>${respText}</p></body></html>`);
         resp.headers.set("Content-Type", "text/html; charset=UTF-8");
         return resp;
