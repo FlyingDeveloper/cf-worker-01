@@ -12,11 +12,11 @@ import { factorial } from './calculations';
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
-let cache = caches.default;
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
-        let resp = new Response("<html><head></head><body><p>Hello world</p></body></html>");
+        let respText = `Hello, world! The factorial of 5 is ${factorial(5)}.`;
+        let resp = new Response(`<html><head></head><body><p>${respText}</p></body></html>`);
         resp.headers.set("Content-Type", "text/html; charset=UTF-8");
         return resp;
 	},
