@@ -15,7 +15,7 @@ import { factorial } from './calculations';
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
-        let url = "https://dev-rhamilton-test01.pantheonsite.io/";
+        let url = "https://01161500.monoraillime.xyz/";
         let beReq = new Request(url);
         let beResp = await fetch(beReq, { cf: { cacheEverything: true }});
         let headers = "";
