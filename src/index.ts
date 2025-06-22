@@ -15,7 +15,8 @@ import { factorial } from './calculations';
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
-        let beResp = await fetch("https://hello-world-worker.robhamilton-879.workers.dev/");
+        let url = "https://03141400.monoraillime.xyz/subworker"
+        let beResp = await fetch(url);
         let headers = "";
         beResp.headers.forEach((val, key) => {
             headers += `${key}: ${val}<br />`;
