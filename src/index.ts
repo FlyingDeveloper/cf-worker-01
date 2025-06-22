@@ -16,7 +16,7 @@ import { factorial } from './calculations';
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
         let url = "https://03141400.monoraillime.xyz/subworker"
-        let beResp = await fetch(url);
+        let beResp = await fetch(url, { cf: { cacheEverything: true }});
         let headers = "";
         beResp.headers.forEach((val, key) => {
             headers += `${key}: ${val}<br />`;
