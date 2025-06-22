@@ -16,6 +16,8 @@ let cache = caches.default;
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
-        return new Response("<html><head></head><body><p>Hello world</p></body></html>")
+        let resp = new Response("<html><head></head><body><p>Hello world</p></body></html>");
+        resp.headers.set("Content-Type", "text/html; charset=UTF-8");
+        return resp;
 	},
 } satisfies ExportedHandler<Env>;
