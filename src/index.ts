@@ -16,8 +16,12 @@ import { factorial } from './calculations';
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
         let beResp = await fetch("https://hello-world-worker.robhamilton-879.workers.dev/");
-        let cacheStatus = beResp.headers.get("cf-cache-status");
-        let respText = `Hello, world! The factorial of 5 is ${factorial(5)}.<br />${cacheStatus}`;
+        let headers = "";
+        beResp.headers.forEach((key, val) => {
+            headers += `${key}: ${val}<br />`;
+        })
+        //let cacheStatus = beResp.headers.get("cf-cache-status");
+        let respText = `Hello, world! The factorial of 5 is ${factorial(5)}.<br />${headers}`;
         let resp = new Response(`<html><head></head><body><p>${respText}</p></body></html>`);
         resp.headers.set("Content-Type", "text/html; charset=UTF-8");
         return resp;
